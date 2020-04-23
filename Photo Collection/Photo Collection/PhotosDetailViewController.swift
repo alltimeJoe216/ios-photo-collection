@@ -20,7 +20,7 @@ class PhotosDetailViewController: UIViewController, UIImagePickerControllerDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setTheme()
         updateViews()
     }
     
@@ -39,7 +39,6 @@ class PhotosDetailViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     func updateViews() {
-        setTheme()
         
         guard let photo = photo else { return }
         
@@ -47,7 +46,7 @@ class PhotosDetailViewController: UIViewController, UIImagePickerControllerDeleg
     }
     // addPhoto
     
-    @IBAction func addPhoto(_ sender: Any) {
+    @IBAction func addPhoto(_ sender: UIButton) {
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -62,7 +61,7 @@ class PhotosDetailViewController: UIViewController, UIImagePickerControllerDeleg
     
     @IBAction func savePhoto(_ sender: Any) {
         
-        guard let photoTitle = textView.text, !photoTitle.isEmpty,
+        guard let title = textView.text, !title.isEmpty,
             
             let photoView = imageView.image,
             
@@ -70,13 +69,13 @@ class PhotosDetailViewController: UIViewController, UIImagePickerControllerDeleg
         
         if let photo = photo {
             
-            photoController?.update(photo: photo, data: photoData, title: photoTitle)
+            photoController?.update(photo: photo, data: photoData, title: title)
             
             navigationItem.title = "Update Your Photo!"
             
         } else {
             
-            photoController?.create(imageData: photoData, title: photoTitle)
+            photoController?.create(imageData: photoData, title: title)
             
             textView.text = nil
             imageView.image = nil

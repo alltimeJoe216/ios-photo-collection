@@ -19,7 +19,6 @@ class PhotosCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         setTheme()
-        
         collectionView.reloadData()
     }
     
@@ -78,6 +77,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         let photo = photoController.photos[indexPath.item]
         
         cell.photoLabel.text = photo.title
+        cell.photo = photo
         
         return cell
     }
