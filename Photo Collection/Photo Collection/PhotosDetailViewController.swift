@@ -65,11 +65,35 @@ class PhotosDetailViewController: UIViewController, UIImagePickerControllerDeleg
         guard let photoTitle = textView.text, !photoTitle.isEmpty,
             
             let photoView = imageView.image,
+            
             let photoData = photoView.pngData() else { return }
         
         if let photo = photo {
             
-            photoController?.update(photo: photo, data: photoData, title: title!)
+            photoController?.update(photo: photo, data: photoData, title: photoTitle)
+            
+            navigationItem.title = "Update Your Photo!"
+            
+        } else {
+            
+            photoController?.create(imageData: photoData, title: photoTitle)
+            
+            textView.text = nil
+            imageView.image = nil
+            navigationItem.title = "Add a photo to your collection!"
         }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let originalImage = info[.originalImage] as? UIImage else { return }
+        
+        imageView.image = originalImage
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }

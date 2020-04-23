@@ -14,8 +14,8 @@ class PhotoController {
     
     func create(imageData: Data, title: String) {
         
-        var photo = Photo(imageData: imageData, title: title)
-        
+        let photo = Photo(imageData: imageData, title: title)   
+         
         photos.append(photo)
     }
     
@@ -25,6 +25,5 @@ class PhotoController {
         
         photos[index].imageData = data
         photos[index].title = title
-        
     }
 }
